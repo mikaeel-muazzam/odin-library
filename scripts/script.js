@@ -24,6 +24,7 @@ function addBookToLibrary(title, author, pages, read, rating) {
     // take params, create a book then store it in the array
     const book = new Book(title, author, pages, read, rating);
     myLibrary.push(book);
+    displayBooks();
 }
 
 function createBookCard(book) {
@@ -48,6 +49,7 @@ function createBookCard(book) {
 }
 
 function displayBooks() {
+    bookContainer.replaceChildren();
     myLibrary.forEach(book => createBookCard(book))
 }
 
@@ -62,19 +64,13 @@ function testBooks(num) {
 
 const bookContainer = document.querySelector(".book-container");
 
-testBooks(3);
-displayBooks()
+testBooks(0);
 
 // Responsive feedback in the form
 // hide/reveal rating slider if not read/read
 const readCheck = document.querySelector("#read");
 const rateBook = document.querySelector("#rate-book")
-readCheck.addEventListener("input", ev => {
-    console.log(`${ev.target.value}`)
-    if (ev.target.value === "on") {
-        rateBook.toggleAttribute("hidden");
-    }
-});
+readCheck.addEventListener("input", () => rateBook.toggleAttribute("hidden"));
 
 // rating slider
 const ratingInput = document.querySelector("#rating");
@@ -83,4 +79,20 @@ const ratingOutput = document.querySelector("#rating-output");
 ratingInput.addEventListener("input", ev => {
     const val = ev.target.value;
     ratingOutput.textContent = val;
+});
+
+// addbook behaviour
+const addButton = document.querySelector("#addbook");
+
+addButton.addEventListener("click", ev => {
+    ev.preventDefault();
+    console.log(`submitted`);
+
+    addBookToLibrary(
+        document.querySelector('#title').value,
+        document.querySelector('#author').value,
+        document.querySelector('#pages').value,
+        document.querySelector('#read').checked,
+        document.querySelector('#rating').value,
+    );
 });
