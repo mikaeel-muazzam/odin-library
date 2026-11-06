@@ -56,3 +56,7 @@ body > h1 {
 .book-item p {
     color: var(--text-subtle);
 }
+
+form li {
+    list-style-type: none;
+}

@@ -17,6 +17,41 @@
     </div>
     <div class="add-section container">
         <h2>Add</h2>
+        <form action="" method="post" id="new-book-form">
+            <ul>
+                <li><label for="title">Title</label></li>
+                <li><input type="text" id="title" name="title"></li>
+            </ul>
+            <ul>
+                <li><label for="author">Author</label></li>
+                <li><input type="text" id="author" name="author"></li>
+            </ul>
+            <ul>
+                <li><label for="pages">No. of pages</label></li>
+                <li><input type="number" id="pages" name="pages"></li>
+            </ul>
+            <ul>
+                <li><label for="read">Have you read this book?</label></li>
+                <li><input type="checkbox" id="read" name="read"></li>
+            </ul>
+            <ul id="rate-book" hidden>
+                <li><label for="rating">Rate this book from 1 (lowest) to 5 (highest)</label></li>
+                <li><span>
+                    <input type="range" id="rating" name="rating" list="markers" min="1" max="5" step="0.5">
+                    <output id="rating-output">2.5</output>
+                </span></li>
+            </ul>
+            <ul>
+                <li><button type="submit">Add book?</button></li>
+            </ul>
+            <datalist id="markers">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+            </datalist>
+        </form>
     </div>
 </body>
 </html>

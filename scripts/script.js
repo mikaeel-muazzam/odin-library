@@ -64,3 +64,23 @@ const bookContainer = document.querySelector(".book-container");
 
 testBooks(3);
 displayBooks()
+
+// Responsive feedback in the form
+// hide/reveal rating slider if not read/read
+const readCheck = document.querySelector("#read");
+const rateBook = document.querySelector("#rate-book")
+readCheck.addEventListener("input", ev => {
+    console.log(`${ev.target.value}`)
+    if (ev.target.value === "on") {
+        rateBook.toggleAttribute("hidden");
+    }
+});
+
+// rating slider
+const ratingInput = document.querySelector("#rating");
+const ratingOutput = document.querySelector("#rating-output");
+
+ratingInput.addEventListener("input", ev => {
+    const val = ev.target.value;
+    ratingOutput.textContent = val;
+});
