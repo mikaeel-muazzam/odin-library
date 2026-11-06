@@ -1,2 +1,2 @@
-# odin-web-template
-Template repository for webdev projects in The Odin project
+# odin-library
+Project repository for the Library project as part of The Odin Project
