@@ -16,11 +16,11 @@
 }
 
 body {
-    padding: 2rem;
+    padding: max(12px, 2rem);
     background-color: var(--bg-light);
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 2rem
+    gap: max(12px, 2rem);
 }
 
 body > h1 {
@@ -44,6 +44,7 @@ body > h1 {
     place-items: center;
 }
 
+form,
 .book-item {
     background-color: var(--bg-strong);
     width: 90%;
@@ -57,6 +58,54 @@ body > h1 {
     color: var(--text-subtle);
 }
 
+form {
+    width: auto;
+    height: fit-content;
+    padding: 2rem;
+    font-size: 140%;
+}
+
 form li {
     list-style-type: none;
+    color: var(--text-subtle);
+    margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+form label {
+    font-size: 60%;
+}
+
+form input[type="text"],
+form input[type="number"] {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 12px;
+    background-color: var(--bg-light);
+    border: 1px solid var(--text-subtle);
+}
+
+li:has(#addbook),
+li:has(input#read) {
+    flex-direction: column;
+}
+
+li:has(#addbook),
+li:has(input#read),
+#rate-book span {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+form output {
+    color: var(--text-main);
+}
+
+button#addbook {
+    font: inherit;
+    padding: 0.5rem 2.5rem 0.5rem 2.5rem;
+    text-align: center;
+    border: 3px dashed var(--text-main);
+    background-color: var(--bg-light);
+    border-radius: 12px;
 }

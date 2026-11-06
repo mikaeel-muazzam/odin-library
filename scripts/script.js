@@ -78,7 +78,7 @@ const ratingOutput = document.querySelector("#rating-output");
 
 ratingInput.addEventListener("input", ev => {
     const val = ev.target.value;
-    ratingOutput.textContent = val;
+    ratingOutput.textContent = `${val} / 5`;
 });
 
 // addbook behaviour
