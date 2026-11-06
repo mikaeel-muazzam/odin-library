@@ -37,7 +37,7 @@ function createBookCard(book) {
 
     //add textcontent
     bookHeading.textContent = `${book.title} by ${book.author}`
-    bookDesc.textContent = `This book has ${book.pages} pages. \n` + (
+    bookDesc.textContent = `This book has ${book.pages} pages. ` + (
                             (book.read) ? 
                             `You have read this book and given it a rating of ${book.rating}` : 
                             `You have not read this book.`);
@@ -51,4 +51,16 @@ function displayBooks() {
     myLibrary.forEach(book => createBookCard(book))
 }
 
-const bookContainer = document.querySelector(".book-container")
+function testBooks(num) {
+    for (let i = 0; i < num; i++) {
+        addBookToLibrary('The Hobbit', 'J. Tolkien', 500, true, 5);
+        addBookToLibrary('Mr. Fox', 'R. Dahl', 67, false);
+        addBookToLibrary('Frankenstein', 'M. Shelley', '235', 'true', 4.5);
+        addBookToLibrary('The Becoming', 'J. Doe', 333, false);
+    }
+}
+
+const bookContainer = document.querySelector(".book-container");
+
+testBooks(3);
+displayBooks()
