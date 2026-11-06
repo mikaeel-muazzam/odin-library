@@ -32,9 +32,11 @@ function createBookCard(book) {
     const bookCard = document.createElement('div');
     const bookHeading = document.createElement('h3');
     const bookDesc = document.createElement('p');
+    const removeBtn = document.createElement('button');
 
     //add classes
     bookCard.className = "book-item";
+    removeBtn.className = "remove-btn";
 
     //add textcontent
     bookHeading.textContent = `${book.title} by ${book.author}`
@@ -42,10 +44,17 @@ function createBookCard(book) {
                             (book.read) ? 
                             `You have read this book and given it a rating of ${book.rating}` : 
                             `You have not read this book.`);
+    removeBtn.textContent = `Remove`;
+
+    removeBtn.dataset.bookid = book.id;
 
     //append elements
-    bookCard.append(bookHeading, bookDesc)
+    bookCard.append(bookHeading, bookDesc, removeBtn)
     bookContainer.appendChild(bookCard);
+
+    // remove button behaviour
+    removeBtns = document.querySelectorAll('.remove-btn');
+    removeBtns.forEach(btn => btn.addEventListener("click", removeBook));
 }
 
 function displayBooks() {
@@ -62,9 +71,19 @@ function testBooks(num) {
     }
 }
 
-const bookContainer = document.querySelector(".book-container");
+function removeBook(ev) {
+    const btnclicked = ev.target;
+    const targetid = btnclicked.dataset.bookid;
 
-testBooks(0);
+    myLibrary.splice(
+        myLibrary.findIndex(index => index.id === targetid),
+        1
+    );
+
+    displayBooks();
+}
+
+const bookContainer = document.querySelector(".book-container");
 
 // Responsive feedback in the form
 // hide/reveal rating slider if not read/read
@@ -96,3 +115,9 @@ addButton.addEventListener("click", ev => {
         document.querySelector('#rating').value,
     );
 });
+
+// remove btn behaviour
+let removeBtns = document.querySelectorAll('.remove-btn');
+
+// testbooks
+testBooks(2);
