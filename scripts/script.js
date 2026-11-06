@@ -25,3 +25,30 @@ function addBookToLibrary(title, author, pages, read, rating) {
     const book = new Book(title, author, pages, read, rating);
     myLibrary.push(book);
 }
+
+function createBookCard(book) {
+    //create elements
+    const bookCard = document.createElement('div');
+    const bookHeading = document.createElement('h3');
+    const bookDesc = document.createElement('p');
+
+    //add classes
+    bookCard.className = "book-item";
+
+    //add textcontent
+    bookHeading.textContent = `${book.title} by ${book.author}`
+    bookDesc.textContent = `This book has ${book.pages} pages. \n` + (
+                            (book.read) ? 
+                            `You have read this book and given it a rating of ${book.rating}` : 
+                            `You have not read this book.`);
+
+    //append elements
+    bookCard.append(bookHeading, bookDesc)
+    bookContainer.appendChild(bookCard);
+}
+
+function displayBooks() {
+    myLibrary.forEach(book => createBookCard(book))
+}
+
+const bookContainer = document.querySelector(".book-container")
