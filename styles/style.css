@@ -3,6 +3,7 @@
     --text-subtle: #544;
     --bg-light: #fee;
     --bg-strong: #fed;
+    --action-button-utility: #44e;
     --action-button-destructive: #e44;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.3;
@@ -117,6 +118,7 @@ button#addbook {
     border-radius: 12px;
 }
 
+.read-btn,
 .remove-btn {
     font-weight: bold;
     font-size: 85%;
@@ -125,5 +127,10 @@ button#addbook {
     border: 2px solid var(--text-main);
     border-radius: 6px;
     padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+    margin-right: 1.3rem;
     width: fit-content;
+}
+
+.read-btn {
+    background-color: var(--action-button-utility);
 }
