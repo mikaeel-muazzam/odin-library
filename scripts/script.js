@@ -18,6 +18,10 @@ function Book(title, author, pages, read, rating) {
     this.pages = pages;
     this.read = read;
     this.rating = rating;
+
+    this.changeReadStatus = function () {
+        this.read = this.read ? false : true;
+    }
 }
 
 function addBookToLibrary(title, author, pages, read, rating) {
@@ -32,29 +36,40 @@ function createBookCard(book) {
     const bookCard = document.createElement('div');
     const bookHeading = document.createElement('h3');
     const bookDesc = document.createElement('p');
+    const btns = document.createElement('span');
     const removeBtn = document.createElement('button');
+    const readBtn = document.createElement('button');
 
     //add classes
     bookCard.className = "book-item";
+    btns.className = "book-btns"
     removeBtn.className = "remove-btn";
+    readBtn.className = "read-btn";
 
     //add textcontent
     bookHeading.textContent = `${book.title} by ${book.author}`
     bookDesc.textContent = `This book has ${book.pages} pages. ` + (
                             (book.read) ? 
-                            `You have read this book and given it a rating of ${book.rating}` : 
+                            `You have read this book and given it a rating of ${book.rating}.` : 
                             `You have not read this book.`);
     removeBtn.textContent = `Remove`;
+    readBtn.textContent = 'Read';
 
     removeBtn.dataset.bookid = book.id;
+    readBtn.dataset.bookid = book.id;
 
     //append elements
-    bookCard.append(bookHeading, bookDesc, removeBtn)
+    btns.append(readBtn, removeBtn);
+    bookCard.append(bookHeading, bookDesc, btns);
     bookContainer.appendChild(bookCard);
 
     // remove button behaviour
-    removeBtns = document.querySelectorAll('.remove-btn');
+    const removeBtns = document.querySelectorAll('.remove-btn');
     removeBtns.forEach(btn => btn.addEventListener("click", removeBook));
+
+    // read-btn behavious
+    const readBtns = document.querySelectorAll('.read-btn');
+    readBtns.forEach(btn => btn.addEventListener("click", readBook));
 }
 
 function displayBooks() {
@@ -81,6 +96,45 @@ function removeBook(ev) {
     );
 
     displayBooks();
+}
+
+function readBook(ev) {
+    const btnclicked = ev.target;
+    const targetid = btnclicked.dataset.bookid;
+
+    const targetBook = myLibrary.filter(book => book.id === targetid);
+    
+    targetBook[0].changeReadStatus();
+
+    if (targetBook[0].read) {
+        const userRating = prompt(`Rate ${targetBook[0].title} from 1 (lowest) to 5 (highest).`);
+        targetBook[0].rating = roundRating(userRating);
+    }
+
+    displayBooks();
+}
+
+function roundRating (rating) {
+    // guard checks to limit the range of our rating
+    if (rating > 5) return 5;
+    if (rating < 1) return 1;
+
+    // separate the integer and decimal portions
+    let integer = rating * 10;
+    let decimal = integer % 10;
+    integer -= decimal;
+
+    // if decimal is equal to 0.5, the rating will increase by 0.5
+    // else if decimal is greater than 0.5, the rating will increase by 1
+    // else, the rating will increase by 0
+    decimal = (decimal === 5) ? 5 
+            : (decimal > 5) ? 10 
+            : 0;
+
+    // sum the integer and decimal parts
+    rating = (integer + decimal) / 10;
+
+    return rating;
 }
 
 const bookContainer = document.querySelector(".book-container");
@@ -116,8 +170,5 @@ addButton.addEventListener("click", ev => {
     );
 });
 
-// remove btn behaviour
-let removeBtns = document.querySelectorAll('.remove-btn');
-
 // testbooks
-testBooks(2);
+testBooks(1);
