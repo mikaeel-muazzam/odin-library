@@ -2,24 +2,19 @@ console.log("Welcome to the library");
 
 const myLibrary = [];
 
-function Book(title, author, pages, read, rating) {
+class Book {
     // the constructor..
-    //protection if called without 'new'
-    if (!new.target) {
-        throw Error("You must use 'new' with a constructor function!!!");
+    constructor (title, author, pages, read, rating) {
+        this.id = crypto.randomUUID(); //uuid creation
+        //properties
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.rating = rating;
     }
-    //uuid creation
-    const id = crypto.randomUUID()
 
-    //properties
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.rating = rating;
-
-    this.changeReadStatus = function () {
+    changeReadStatus () {
         this.read = this.read ? false : true;
     }
 }
